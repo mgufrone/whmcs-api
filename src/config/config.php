@@ -2,8 +2,8 @@
 
 return array(
 
-	'username'	=>	'webcentralhost',
+	'username'	=>	'username',
 	'password'	=>	'password',
-	'url'		=>	'http://www.webcentralhost.com/whmcs/includes/api.php', // API url
+	'url'		=>	'http://url.com/whmcs/includes/api.php', // API url
 
 );
