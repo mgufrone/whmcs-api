@@ -39,7 +39,7 @@ class WhmcsApiServiceProvider extends ServiceProvider {
 		  
 		  $loader = \Illuminate\Foundation\AliasLoader::getInstance();
 
-		  $loader->alias('WhmcsApi', 'Queiroz\WhmcsApi\Facades\WhmcsApi');
+		  $loader->alias('Whmcs', 'Queiroz\WhmcsApi\Facades\WhmcsApi');
 
 		});
 
