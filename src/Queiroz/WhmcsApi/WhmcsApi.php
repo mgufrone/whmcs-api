@@ -40,8 +40,27 @@ class WhmcsApi
 		}
 
 		curl_close($ch);
-		    
-		$results = explode(';' ,$data);
+
+		// Identify XML result
+		$xml = preg_match('/(\<\?xml)/', $data);
+		
+		if($xml) {
+			return $this->formatXml($data);
+		} else {
+			return $this->formatObject($data);
+		}
+
+	}
+
+	public function formatXml($input)
+	{
+		return new \SimpleXMLElement($input);
+	}
+
+	public function formatObject($input)
+	{
+
+		$results = explode(';' ,$input);
 
 		$object = new \stdClass(); // standard object
 
@@ -55,7 +74,6 @@ class WhmcsApi
 		}
 
 		return $object;
-
 	}
 
 	public function execute($action, $params)
