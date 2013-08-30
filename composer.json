@@ -1,6 +1,9 @@
 {
     "name": "queiroz/whmcs-api",
-    "description": "",
+    "description": "Whmcs API for Laravel 4",
+    "keywords": ["Whmcs", "API", "laravel", "php"],
+    "homepage": "https://github.com/queiroz/whmcs-api",
+    "license": "MIT",
     "authors": [
         {
             "name": "Rodrigo Queiroz",
