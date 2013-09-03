@@ -1,4 +1,4 @@
-TldLang
+WHMCS-API
 =======
 
 Laravel 4 - Simple package for WHMCS external API
