@@ -36,7 +36,7 @@ class WhmcsApi
 		$data = curl_exec($ch);
 
 		if (curl_error($ch)) {
-			throw new Exception("Connection Error: " . curl_errno($ch) . ' - ' . curl_error($ch));
+			throw new \Exception("Connection Error: " . curl_errno($ch) . ' - ' . curl_error($ch));
 		}
 
 		curl_close($ch);
