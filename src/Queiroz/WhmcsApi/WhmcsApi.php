@@ -1,19 +1,18 @@
 <?php namespace Queiroz\WhmcsApi;
-
+use GuzzleHttp\Client;
 class WhmcsApi 
 {
 
-	public function init($action, $actionParams)
+	public function execute($action, $params)
 	{
+		
+		// Initiate
 
-		$params = array();
 		$params['username'] 	= \Config::get('whmcs-api::username');
 		$params['password'] 	= md5(\Config::get('whmcs-api::password'));
 		$params['url'] 			= \Config::get('whmcs-api::url');
+		$params['responsetype'] = \Config::get('whmcs-api::responsetype');
 		$params['action']		= $action;
-
-		// merge $actionParams with $params
-		$params = array_merge($params, $actionParams);
 
 		// call curl init connection
 		return $this->curl($params);
@@ -27,61 +26,24 @@ class WhmcsApi
 		// unset url
 		unset($params['url']);
 
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 100);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-		$data = curl_exec($ch);
-
-		if (curl_error($ch)) {
-			throw new \Exception("Connection Error: " . curl_errno($ch) . ' - ' . curl_error($ch));
-		}
-
-		curl_close($ch);
-
-		// Identify XML result
-		$xml = preg_match('/(\<\?xml)/', $data);
+		$client = new Client;
+		$response = $client->post($url, ['body'=>$params]);
 		
-		if($xml) {
-			return $this->formatXml($data);
-		} else {
-			return $this->formatObject($data);
+		try
+		{
+			return $response->json();
+		}
+		catch(\GuzzleHttp\Exception\ParseException $e)
+		{
+			return $response->xml();
 		}
 
 	}
 
-	public function formatXml($input)
+	// using magic method
+	public function __call($action, $params)
 	{
-		return new \SimpleXMLElement($input);
-	}
-
-	public function formatObject($input)
-	{
-
-		$results = explode(';' ,$input);
-
-		$object = new \stdClass(); // standard object
-
-		foreach($results as $result) {
-
-			if(!empty($result)) {
-				$resultValue = explode('=', $result);
-				$object->$resultValue[0] = $resultValue[1];
-			}
-
-		}
-
-		return $object;
-	}
-
-	public function execute($action, $params)
-	{
-		
-		// Initiate
-		return $this->init($action, $params);
-
+		return $this->execute($action, $params);
 	}
 
 }
