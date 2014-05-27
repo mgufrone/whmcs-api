@@ -6,7 +6,11 @@ Laravel 4 - Simple package for WHMCS external API
 Installation
 ============
 
-Add whmcs-api to your composer.json file:
+Run this to install on your current project
+
+	$ composer require queiroz/whmcs-api:dev-master 
+
+Or you can add whmcs-api to your composer.json file:
 
 
 	"require": {
@@ -34,10 +38,10 @@ go to laravel/vendor/queiroz/whmcs-api/src/config/config.php and set the paramet
 
 	return array(
 
-		'username'	=>	'api-username',
-		'password'	=>	'api-password',
-		'url'		=>	'http://www.site.com/whmcs/includes/api.php', // API url
-
+		'username'		=>	'api-username',
+		'password'		=>	'api-password',
+		'url'			=>	'http://www.site.com/whmcs/includes/api.php', // API url
+		'responsetype'	=> 'json'
 	);
 
 #### Publish the configuration
@@ -57,6 +61,10 @@ Logging a user to WHMCS
 	$password = 'password'; // Client Password
 
 	$login = Whmcs::execute('validatelogin', array('email' => $username, 'password2' => $password));
+
+	// or
+
+	$login = Whmcs::validatelogin(array('email' => $username, 'password2' => $password));
 
 	if($login->result == 'success') {
 		echo 'User Logged In';

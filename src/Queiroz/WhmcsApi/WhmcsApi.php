@@ -31,11 +31,11 @@ class WhmcsApi
 		
 		try
 		{
-			return $response->json();
+			return json_decode(json_encode($response->json()));
 		}
 		catch(\GuzzleHttp\Exception\ParseException $e)
 		{
-			return $response->xml();
+			return json_decode(json_encode($response->xml()));
 		}
 
 	}
