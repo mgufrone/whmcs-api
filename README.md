@@ -81,3 +81,37 @@ Logging a user to WHMCS
 	}
 
 For reference on WHMCS API please follow [http://docs.whmcs.com/API](http://docs.whmcs.com/API/ "WHMCS API Documentation")
+
+
+Migration Guide
+===============
+
+### Service Provider
+
+This package has different namepsace. First of all you should change this
+
+
+	'Queiroz\WhmcsApi\WhmcsApiServiceProvider'
+
+to
+
+	'Gufy\Whmcs\WhmcsServiceProvider'
+
+### Configuration File
+
+If you already use the old one, first of all, do publish configuration file by doing this on command line
+	
+	php artisan config:publish gufy/whmcs
+
+And then, copy or move your old configuration from `app/config/packages/queiroz/whmcs-api/config.php` to a new path at `app/config/packages/gufy/whmcs/config.php`
+
+### Dynamic Configuration
+
+If your site has multiple whmcs configuration, you sure will do override configuration like this
+
+	\Config::set('whmcs::url','http://whmcs.site.com/includes/api.php');
+	\Config::set('whmcs::password','your_password');
+	\Config::set('whmcs::username','your_username');
+
+Please make sure the namespace of your configuration is `whmcs` not `whmcs-api`.
+
