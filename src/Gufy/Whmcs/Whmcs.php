@@ -36,13 +36,21 @@ class Whmcs
 		
 		try
 		{
-			return json_decode(json_encode($response->json()));
+			return $this->processResponse($response->json());
 		}
 		catch(\GuzzleHttp\Exception\ParseException $e)
 		{
-			return json_decode(json_encode($response->xml()));
+			return $this->processResponse($response->xml());
 		}
 
+	}
+
+	public function processResponse($response)
+	{
+		if(isset($response['result']) && 'error' === $response['result'] 
+			|| isset($response['status']) && 'error' === $response['status'] )
+			throw new \Exception("WHMCS Error : ".$response['message']);
+		return json_decode(json_encode($response));
 	}
 
 	// using magic method
