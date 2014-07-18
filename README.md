@@ -1,5 +1,5 @@
-WHMCS-API
-=======
+Laravel WHMCS API
+=================
 
 Laravel 4 - Simple package for WHMCS external API. It actually forked from https://github.com/queiroz/whmcs-api, but it seems no longer maintained, so i reuse that repo.
 
@@ -29,7 +29,14 @@ Configuration
 
 register this service provider at the bottom of the $providers array: app.php
 
-	'Queiroz\WhmcsApi\WhmcsApiServiceProvider'
+	'Gufy\Whmcs\WhmcsServiceProvider'
+
+#### Publish the configuration
+
+When this command is executed, the configuration files for your application will be copied to `app/config/packages/gufy/whmcs` where they can be safely modified by the developer!
+
+	php artisan config:publish gufy/whmcs
+
 
 #### Setting you API URL
 
@@ -44,11 +51,6 @@ go to laravel/vendor/gufy/whmcs/src/config/config.php and set the parameters
 		'responsetype'	=> 'json'
 	);
 
-#### Publish the configuration
-
-When this command is executed, the configuration files for your application will be copied to `app/config/packages/gufy/whmcs` where they can be safely modified by the developer!
-
-	php artisan config:publish gufy/whmcs
 
 Usage
 =====
