@@ -18,7 +18,7 @@ class WhmcsServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('gufy/whmcs-api');
+		$this->package('gufy/whmcs');
 	}
 
 	/**
@@ -29,7 +29,7 @@ class WhmcsServiceProvider extends ServiceProvider {
 	public function register()
 	{
 
-		$this->app['whmcs'] = $this->app->share(function() {
+		$this->app['Whmcs'] = $this->app->share(function() {
 			
 			return new Whmcs();
 

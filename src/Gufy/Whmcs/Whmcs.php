@@ -7,14 +7,14 @@ class Whmcs
 		
 		// Initiate
 
-		$params['username'] 	= \Config::get('whmcs-api::username');
-		$params['password'] 	= md5(\Config::get('whmcs-api::password'));
-		$params['responsetype'] = \Config::get('whmcs-api::responsetype');
+		$params['username'] 	= \Config::get('whmcs::username');
+		$params['password'] 	= md5(\Config::get('whmcs::password'));
+		$params['responsetype'] = \Config::get('whmcs::responsetype');
 		$params['action']		= $action;
 
 		// call curl init connection
 		// set url
-		$url = \Config::get('whmcs-api::url');
+		$url = \Config::get('whmcs::url');
 		// unset url
 		unset($params['url']);
 
