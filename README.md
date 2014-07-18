@@ -1,20 +1,20 @@
 WHMCS-API
 =======
 
-Laravel 4 - Simple package for WHMCS external API
+Laravel 4 - Simple package for WHMCS external API. It actually forked from https://github.com/queiroz/whmcs-api, but it seems no longer maintained, so i reuse that repo.
 
 Installation
 ============
 
 Run this to install on your current project
 
-	$ composer require queiroz/whmcs-api:dev-master 
+	$ composer require gufy/whmcs:dev-master 
 
-Or you can add whmcs-api to your composer.json file:
+Or you can add this package to your composer.json file:
 
 
 	"require": {
-		"queiroz/whmcs-api": "dev-master"
+		"gufy/whmcs": "dev-master"
 	}
 
 
@@ -33,7 +33,7 @@ register this service provider at the bottom of the $providers array: app.php
 
 #### Setting you API URL
 
-go to laravel/vendor/queiroz/whmcs-api/src/config/config.php and set the parameters
+go to laravel/vendor/gufy/whmcs/src/config/config.php and set the parameters
 
 
 	return array(
@@ -46,9 +46,9 @@ go to laravel/vendor/queiroz/whmcs-api/src/config/config.php and set the paramet
 
 #### Publish the configuration
 
-When this command is executed, the configuration files for your application will be copied to `app/config/packages/queiroz/whmcs-api` where they can be safely modified by the developer!
+When this command is executed, the configuration files for your application will be copied to `app/config/packages/gufy/whmcs` where they can be safely modified by the developer!
 
-	php artisan config:publish queiroz/whmcs-api
+	php artisan config:publish gufy/whmcs
 
 Usage
 =====
@@ -60,11 +60,17 @@ Logging a user to WHMCS
 	$username = 'client';	// Client Username
 	$password = 'password'; // Client Password
 
-	$login = Whmcs::execute('validatelogin', array('email' => $username, 'password2' => $password));
+	$login = Whmcs::execute('validatelogin', array(
+		'email' => $username, 
+		'password2' => $password
+	));
 
 	// or
 
-	$login = Whmcs::validatelogin(array('email' => $username, 'password2' => $password));
+	$login = Whmcs::validatelogin(array(
+		'email' => $username, 
+		'password2' => $password
+	));
 
 	if($login->result == 'success') {
 		echo 'User Logged In';
