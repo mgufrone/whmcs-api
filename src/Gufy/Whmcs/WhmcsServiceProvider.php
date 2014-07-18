@@ -1,8 +1,8 @@
-<?php namespace Queiroz\WhmcsApi;
+<?php namespace Gufy\Whmcs;
 
 use Illuminate\Support\ServiceProvider;
 
-class WhmcsApiServiceProvider extends ServiceProvider {
+class WhmcsServiceProvider extends ServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.
@@ -29,9 +29,9 @@ class WhmcsApiServiceProvider extends ServiceProvider {
 	public function register()
 	{
 
-		$this->app['WhmcsApi'] = $this->app->share(function() {
+		$this->app['whmcs'] = $this->app->share(function() {
 			
-			return new WhmcsApi();
+			return new Whmcs();
 
 		});
 
@@ -39,7 +39,7 @@ class WhmcsApiServiceProvider extends ServiceProvider {
 		  
 		  $loader = \Illuminate\Foundation\AliasLoader::getInstance();
 
-		  $loader->alias('Whmcs', 'Queiroz\WhmcsApi\Facades\WhmcsApi');
+		  $loader->alias('Whmcs', 'Gufy\WhmcsApi\Facades\Whmcs');
 
 		});
 
@@ -52,7 +52,7 @@ class WhmcsApiServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array('WhmcsApi');
+		return array('Whmcs');
 	}
 
 }

@@ -1,8 +1,7 @@
-<?php namespace Queiroz\WhmcsApi;
+<?php namespace Gufy\Whmcs;
 use GuzzleHttp\Client;
-class WhmcsApi 
+class Whmcs 
 {
-
 	public function execute($action, $params)
 	{
 		
@@ -37,7 +36,6 @@ class WhmcsApi
 		{
 			return json_decode(json_encode($response->xml()));
 		}
-
 	}
 
 	// using magic method
