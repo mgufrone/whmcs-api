@@ -1,14 +1,14 @@
-<?php namespace Queiroz\WhmcsApi\Facades;
+<?php namespace Gufy\Whmcs\Facades;
  
 use Illuminate\Support\Facades\Facade;
  
-class WhmcsApi extends Facade {
+class Whmcs extends Facade {
  
   /**
    * Get the registered name of the component.
    *
    * @return string
    */
-  protected static function getFacadeAccessor() { return 'WhmcsApi'; }
+  protected static function getFacadeAccessor() { return 'Whmcs'; }
  
 }
