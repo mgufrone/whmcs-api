@@ -18,7 +18,7 @@ class WhmcsServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('queiroz/whmcs-api');
+		$this->package('gufy/whmcs-api');
 	}
 
 	/**
@@ -39,7 +39,7 @@ class WhmcsServiceProvider extends ServiceProvider {
 		  
 		  $loader = \Illuminate\Foundation\AliasLoader::getInstance();
 
-		  $loader->alias('Whmcs', 'Gufy\WhmcsApi\Facades\Whmcs');
+		  $loader->alias('Whmcs', 'Gufy\Whmcs\Facades\Whmcs');
 
 		});
 

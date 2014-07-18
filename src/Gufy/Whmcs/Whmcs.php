@@ -9,19 +9,12 @@ class Whmcs
 
 		$params['username'] 	= \Config::get('whmcs-api::username');
 		$params['password'] 	= md5(\Config::get('whmcs-api::password'));
-		$params['url'] 			= \Config::get('whmcs-api::url');
 		$params['responsetype'] = \Config::get('whmcs-api::responsetype');
 		$params['action']		= $action;
 
 		// call curl init connection
-		return $this->curl($params);
-
-	}
-
-	public function curl($params)
-	{
 		// set url
-		$url = $params['url'];
+		$url = \Config::get('whmcs-api::url');
 		// unset url
 		unset($params['url']);
 
@@ -36,6 +29,7 @@ class Whmcs
 		{
 			return json_decode(json_encode($response->xml()));
 		}
+
 	}
 
 	// using magic method
