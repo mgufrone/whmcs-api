@@ -2,7 +2,7 @@
 use GuzzleHttp\Client;
 class Whmcs 
 {
-	public function execute($action, $params)
+	public function execute($action, $params=[])
 	{
 		
 		// Initiate
@@ -11,20 +11,14 @@ class Whmcs
 		$params['responsetype'] = \Config::get('whmcs::responsetype');
 		$params['action']		= $action;
 
-		$auth_type = \Config::get('whmcs::auth_type', 'auto');
+		$auth_type = \Config::get('whmcs::auth_type', 'password');
 
 		switch($auth_type)
 		{
-			case 'auto':
-			if(!empty($params['password']))
-				$params['password'] 	= md5(\Config::get('whmcs::password'));
-			elseif(!empty($params['api_key']))
-				$params['accesskey'] = \Config::get('api_key');
-			break;
 			case 'api':
-			if(false === \Config::has('api_key') || '' === \Config::get('api_key'))
+			if(false === \Config::has('whmcs::password') || '' === \Config::get('whmcs::password'))
 				throw new \Exception("Please provide api key for authentication");
-			$params['accesskey'] = \Config::get('api_key');
+			$params['accesskey'] = \Config::get('whmcs::password');
 			break;
 			case 'password':
 			if(false === \Config::has('password') || '' === \Config::get('password'))
@@ -32,7 +26,7 @@ class Whmcs
 			$params['password'] 	= md5(\Config::get('whmcs::password'));
 			break;
 		}
-		
+
 		$url = \Config::get('whmcs::url');
 		// unset url
 		unset($params['url']);

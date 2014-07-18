@@ -46,7 +46,8 @@ go to laravel/vendor/gufy/whmcs/src/config/config.php and set the parameters
 	return array(
 
 		'username'		=>	'api-username',
-		'password'		=>	'api-password',
+		'password'		=>	'api-password', // fill these if you want to use username password
+		'auth_type'		=> 	'password', // password or api_key
 		'url'			=>	'http://www.site.com/whmcs/includes/api.php', // API url
 		'responsetype'	=> 'json'
 	);
