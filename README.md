@@ -14,7 +14,7 @@ Or you can add this package to your composer.json file:
 
 
 	"require": {
-		"gufy/whmcs": "dev-master"
+		"gufy/whmcs": "~1.0"
 	}
 
 
