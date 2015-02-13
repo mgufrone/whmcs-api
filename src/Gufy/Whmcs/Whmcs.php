@@ -32,7 +32,7 @@ class Whmcs
 		unset($params['url']);
 
 		$client = new Client;
-		$response = $client->post($url, ['body'=>$params]);
+		$response = $client->post($url, ['body'=>$params,'timeout' => 1200]);
 		
 		try
 		{
