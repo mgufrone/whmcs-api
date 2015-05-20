@@ -18,7 +18,7 @@ class WhmcsServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('gufy/whmcs');
+		// $this->package('gufy/whmcs');
 	}
 
 	/**
@@ -30,18 +30,21 @@ class WhmcsServiceProvider extends ServiceProvider {
 	{
 
 		$this->app['Whmcs'] = $this->app->share(function() {
-			
+
 			return new Whmcs();
 
 		});
 
 		$this->app->booting(function() {
-		  
+
 		  $loader = \Illuminate\Foundation\AliasLoader::getInstance();
 
 		  $loader->alias('Whmcs', 'Gufy\Whmcs\Facades\Whmcs');
 
 		});
+		$this->publishes([
+			dirname(__FILE__).'/../../config/config.php'=>config_path('whmcs.php'),
+		]);
 
 	}
 

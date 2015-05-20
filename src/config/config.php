@@ -6,7 +6,7 @@ return array(
 	| API URL
 	|--------------------------------------------------------------------------
 	|
-	| Full URL to API Access. It includes with /includes/api.php location. 
+	| Full URL to API Access. It includes with /includes/api.php location.
 	|
 	*/
 	'url'		=>	'http://url.com/whmcs/includes/api.php',
@@ -28,7 +28,7 @@ return array(
 	|--------------------------------------------------------------------------
 	|
 	| By default, it will user as api_key either it is using password or api_key.
-	| You can set  'api_key' or 'password'. 
+	| You can set  'api_key' or 'password'.
 	|
 	*/
 	'auth_type'	=>	'password',
@@ -38,7 +38,7 @@ return array(
 	| Password or API Key
 	|--------------------------------------------------------------------------
 	|
-	| If your authentication type is password, fill this with your password of 
+	| If your authentication type is password, fill this with your password of
 	| username you use in this package. Unless, use API key for authentication
 	|
 	*/
@@ -47,14 +47,11 @@ return array(
 
 	/*
 	|--------------------------------------------------------------------------
-	| Response Type
+	| Response
 	|--------------------------------------------------------------------------
 	|
-	| WHMCS provides JSON and XML output. I recommend you to use json instead of 
-	| XML. Besides, every call you make with this package will returned as an 
-	| object
-	|
+	| Response data you want to receive. It can be as an object or an array
 	|
 	*/
-	'responsetype'=> 'json',
+	'response'=> 'object', // array or object
 );

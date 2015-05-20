@@ -15,8 +15,8 @@
         }
     ],
     "require": {
-        "illuminate/support": "4.2.x",
-        "guzzlehttp/guzzle": "~4"
+        "illuminate/support": "~5",
+        "guzzlehttp/guzzle": "~5"
     },
     "autoload": {
         "classmap": [

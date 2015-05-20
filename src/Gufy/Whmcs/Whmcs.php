@@ -1,56 +1,68 @@
 <?php namespace Gufy\Whmcs;
 use GuzzleHttp\Client;
-class Whmcs 
+use Config;
+use Exception;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ParseException;
+class Whmcs
 {
 	public function execute($action, $params=[])
 	{
-		
+
 		// Initiate
 
-		$params['username'] 	= \Config::get('whmcs::username');
-		$params['responsetype'] = \Config::get('whmcs::responsetype');
+		$params['username'] 	= config('whmcs.username');
+		$params['responsetype'] = config('whmcs.responsetype','json');
 		$params['action']		= $action;
 
-		$auth_type = \Config::get('whmcs::auth_type', 'password');
+		$auth_type = config('whmcs.auth_type', 'password');
 
 		switch($auth_type)
 		{
 			case 'api':
-			if(false === \Config::has('whmcs::password') || '' === \Config::get('whmcs::password'))
-				throw new \Exception("Please provide api key for authentication");
-			$params['accesskey'] = \Config::get('whmcs::password');
+			if(false === Config::has('whmcs.password') || '' === config('whmcs.password'))
+				throw new Exception("Please provide api key for authentication");
+			$params['accesskey'] = config('whmcs.password');
 			break;
 			case 'password':
-			if(false === \Config::has('password') || '' === \Config::get('password'))
-				throw new \Exception("Please provide username password for authentication");
-			$params['password'] 	= md5(\Config::get('whmcs::password'));
+			if(false === Config::has('whmcs.password') || '' === config('whmcs.password'))
+				throw new Exception("Please provide username password for authentication");
+			$params['password'] 	= md5(config('whmcs.password'));
 			break;
 		}
 
-		$url = \Config::get('whmcs::url');
+		$url = config('whmcs.url');
 		// unset url
 		unset($params['url']);
 
 		$client = new Client;
-		$response = $client->post($url, ['body'=>$params,'timeout' => 1200,'connect_timeout' => 10]);
-		
 		try
 		{
-			return $this->processResponse($response->json());
+			$response = $client->post($url, ['body'=>$params,'timeout' => 1200,'connect_timeout' => 10]);
+
+			try
+			{
+				return $this->processResponse($response->json());
+			}
+			catch(ParseException $e)
+			{
+				return $this->processResponse($response->xml());
+			}
 		}
-		catch(\GuzzleHttp\Exception\ParseException $e)
+		catch(ClientException $e)
 		{
-			return $this->processResponse($response->xml());
+			$response = $e->getResponse()->json();
+			throw new Exception($response['message']);
 		}
 
 	}
 
 	public function processResponse($response)
 	{
-		if(isset($response['result']) && 'error' === $response['result'] 
+		if(isset($response['result']) && 'error' === $response['result']
 			|| isset($response['status']) && 'error' === $response['status'] )
-			throw new \Exception("WHMCS Error : ".$response['message']);
-		return json_decode(json_encode($response));
+			throw new Exception("WHMCS Response Error : ".$response['message']);
+		return json_decode(json_encode($response),'array'===config('whmcs.response', 'object'));
 	}
 
 	// using magic method
