@@ -6,7 +6,7 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ParseException;
 class Whmcs
 {
-	public function execute($action, $params=[])
+	public static function execute($action, $params=[])
 	{
 
 		// Initiate
@@ -42,11 +42,11 @@ class Whmcs
 
 			try
 			{
-				return $this->processResponse($response->json());
+				return Whmcs::processResponse($response->json());
 			}
 			catch(ParseException $e)
 			{
-				return $this->processResponse($response->xml());
+				return Whmcs::processResponse($response->xml());
 			}
 		}
 		catch(ClientException $e)
@@ -57,7 +57,7 @@ class Whmcs
 
 	}
 
-	public function processResponse($response)
+	public static function processResponse($response)
 	{
 		if(isset($response['result']) && 'error' === $response['result']
 			|| isset($response['status']) && 'error' === $response['status'] )
