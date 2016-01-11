@@ -16,7 +16,7 @@
     ],
     "require": {
         "illuminate/support": "~5",
-        "guzzlehttp/guzzle": "~5"
+        "guzzlehttp/guzzle": "~5.3"
     },
     "autoload": {
         "classmap": [
