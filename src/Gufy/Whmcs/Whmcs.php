@@ -34,8 +34,7 @@ class Whmcs
 		$url = config('whmcs.url');
 		// unset url
 		unset($params['url']);
-
-		$client = new Client;
+		$client = new Client(['defaults' => ['headers' => ['User-Agent' => null]]]);
 		try
 		{
 			$response = $client->post($url, ['body'=>$params,'timeout' => 1200,'connect_timeout' => 10]);
