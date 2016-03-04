@@ -83,7 +83,7 @@ Logging a user to WHMCS
 		echo $login->message;
 	}
 
-For reference on WHMCS API please follow [http://docs.whmcs.com/API](http://docs.whmcs.com/API/ "WHMCS API Documentation")
+For reference on WHMCS API please follow [http://docs.whmcs.com/API](http://docs.whmcs.com/API "WHMCS API Documentation")
 
 
 ### Dynamic Configuration
