@@ -1,6 +1,6 @@
 {
     "name": "gufy/whmcs",
-    "description": "WHMCS API for Laravel 4",
+    "description": "WHMCS API for Laravel 5",
     "keywords": ["Whmcs", "API", "laravel", "php"],
     "homepage": "https://github.com/mgufrone/whmcs-api.git",
     "license": "MIT",
@@ -16,7 +16,7 @@
     ],
     "require": {
         "illuminate/support": "~5",
-        "guzzlehttp/guzzle": "~5.3"
+        "guzzlehttp/guzzle": "~6"
     },
     "autoload": {
         "classmap": [
