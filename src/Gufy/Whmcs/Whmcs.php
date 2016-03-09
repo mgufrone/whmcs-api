@@ -37,11 +37,11 @@ class Whmcs
 		$client = new Client(['defaults' => ['headers' => ['User-Agent' => null]]]);
 		try
 		{
-			$response = $client->post($url, ['body'=>$params,'timeout' => 1200,'connect_timeout' => 10]);
+			$response = $client->post($url, ['form_params' => $params,'timeout' => 1200,'connect_timeout' => 10]);
 
 			try
 			{
-				return $this->processResponse($response->json());
+				return $this->processResponse(json_decode($response->getBody(), true));
 			}
 			catch(ParseException $e)
 			{
