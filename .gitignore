@@ -1,5 +1,4 @@
 /public
-/tests
 /vendor
 composer.phar
 composer.lock
