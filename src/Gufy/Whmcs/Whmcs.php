@@ -50,7 +50,7 @@ class Whmcs
 		}
 		catch(ClientException $e)
 		{
-			$response = $e->getResponse()->json();
+			$response = json_decode($e->getResponse()->getBody(), true);
 			throw new Exception($response['message']);
 		}
 
