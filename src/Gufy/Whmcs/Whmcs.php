@@ -41,7 +41,7 @@ class Whmcs
 
 			try
 			{
-				return $this->processResponse(json_decode($response->getBody(), true));
+				return $this->processResponse(json_decode($response->getBody()->getContents(), true));
 			}
 			catch(ParseException $e)
 			{
@@ -50,7 +50,7 @@ class Whmcs
 		}
 		catch(ClientException $e)
 		{
-			$response = json_decode($e->getResponse()->getBody(), true);
+			$response = json_decode($e->getResponse()->getBody()->getContents(), true);
 			throw new Exception($response['message']);
 		}
 
