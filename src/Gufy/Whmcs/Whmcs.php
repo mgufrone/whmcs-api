@@ -1,19 +1,19 @@
 <?php namespace Gufy\Whmcs;
+
 use GuzzleHttp\Client;
 use Config;
 use Exception;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ParseException;
+
 class Whmcs
 {
-	public function execute($action, $params=[])
+	public function execute($action, $params = [])
 	{
-
 		// Initiate
-
 		$params['username'] 	= config('whmcs.username');
 		$params['responsetype'] = config('whmcs.responsetype','json');
-		$params['action']		= $action;
+		$params['action']	= $action;
 
 		$auth_type = config('whmcs.auth_type', 'password');
 
@@ -35,21 +35,15 @@ class Whmcs
 		// unset url
 		unset($params['url']);
 		$client = new Client(['defaults' => ['headers' => ['User-Agent' => null]]]);
-		try
-		{
+		try{
 			$response = $client->post($url, ['form_params' => $params,'timeout' => 1200,'connect_timeout' => 10]);
 
-			try
-			{
+			try {
 				return $this->processResponse(json_decode($response->getBody()->getContents(), true));
-			}
-			catch(ParseException $e)
-			{
+			} catch(ParseException $e) {
 				return $this->processResponse($response->xml());
 			}
-		}
-		catch(ClientException $e)
-		{
+		} catch(ClientException $e) {
 			$response = json_decode($e->getResponse()->getBody()->getContents(), true);
 			throw new Exception($response['message']);
 		}
