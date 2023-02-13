@@ -1,17 +1,13 @@
 {
-    "name": "gufy/whmcs",
-    "description": "WHMCS API for Laravel 5",
+    "name": "gadhiamitul41/whmcs",
+    "description": "WHMCS API for Laravel",
     "keywords": ["Whmcs", "API", "laravel", "php"],
-    "homepage": "https://github.com/mgufrone/whmcs-api.git",
+    "homepage": "https://github.com/gadhiamitul41/whmcs-api.git",
     "license": "MIT",
     "authors": [
         {
-            "name": "Mochamad Gufron",
-            "email": "mgufronefendi@gmail.com"
-        },
-        {
-            "name": "Rodrigo Queiroz",
-            "email": "rodrigo@queiroz.org"
+            "name": "Mitul G",
+            "email": "mitul@gozonewifi.com"
         }
     ],
     "require": {
