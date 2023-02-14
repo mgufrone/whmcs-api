@@ -1,22 +1,20 @@
 Laravel WHMCS API
 =================
 # Important Notes
-For Laravel 4, please refer to this notes. [Click Here](https://github.com/mgufrone/whmcs-api/tree/v1.0.1)
-
-Laravel 5 - Simple package for WHMCS external API.
+Laravel - Simple package for WHMCS external API.
 
 Installation
 ============
 
 Run this to install on your current project
 
-	$ composer require gufy/whmcs:~2
+	$ composer require gadhiamitul41/whmcs:dev-master
 
 Or you can add this package to your composer.json file:
 
 
 	"require": {
-		"gufy/whmcs": "~2"
+		"gadhiamitul41/whmcs": "dev-master"
 	}
 
 
